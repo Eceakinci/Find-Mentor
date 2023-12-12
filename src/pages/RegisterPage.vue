@@ -1,5 +1,6 @@
 <template>
   <register-form></register-form>
+  registering as a mentor
 </template>
 
 <script>
@@ -12,5 +13,4 @@
 
     }
   }
-
 </script>

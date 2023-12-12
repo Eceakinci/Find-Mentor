@@ -1,14 +1,12 @@
 <template>
-  <register-name></register-name>
+  <router-view></router-view>
 </template>
 
 <script>
-import RegisterName from "@/pages/Register.vue";
 
 export default {
   name: 'App',
   components: {
-    RegisterName
   }
 }
 </script>

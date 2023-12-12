@@ -1,10 +1,13 @@
 <template>
   <form class="container" @submit.prevent="addMentor">
-    <input type="text" placeholder="Name" v-model="name">
-    <input type="text" placeholder="Email" v-model="email">
-    <input type="text" placeholder="Password" v-model="password">
+    <input type="text" placeholder="Name" v-model="name" required>
+    <input type="text" placeholder="Email" v-model="email" required>
+    <input type="text" placeholder="Password" v-model="password" required>
     <!-- TODO: Re-enter password -->
+    <!-- TODO: Email check regex - Email check if there is a user that holds that mail -->
     <button>Register</button>
+    <!-- TODO: Error handling -->
+    <div v-if="error">Error</div>
   </form>
 </template>
 
@@ -17,8 +20,9 @@ export default {
     const email = ref('')
     const password = ref('')
 
+    const error = ref('')
     function addMentor() {
-      fetch(process.env.API_URL, {
+      fetch(process.env.VUE_APP_MENTOR_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -28,21 +32,22 @@ export default {
               name: name.value,
               email: email.value,
               password: password.value
-        }
-        )
+        })
       }).then(response => {
         if (response.ok) {
-          // this.$emit('submitted')
+          console.log('selam')
+          name.value = ''
+          email.value = ''
+          password.value = ''
         } else {
           throw new Error('Could not save data')
         }
       }).catch((error) => {
-        console.log(error.message);
+        error.value = error
       })
     }
-    return { name, email, password, addMentor }
+    return { name, email, password, addMentor, error }
   }
-
 }
 </script>
 
