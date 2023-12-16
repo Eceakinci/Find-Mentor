@@ -8,7 +8,7 @@ const router = createRouter({
     routes: [
         { path: '/', component: Main },
         { path: '/mentors', component: Mentors },
-        { path: '/mentors/:id', component: Mentor },
+        { path: '/mentors/:id', component: Mentor, props: true },
         { path: '/register', component: Register },
     ],
     history: createWebHistory()

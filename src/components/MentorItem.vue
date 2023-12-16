@@ -1,11 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    <p>{{ name }}</p>
+    <p>{{ email }}</p>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld'
+  props: ['name', 'id', 'email'],
+  setup() {
 
+  }
 }
 </script>
 

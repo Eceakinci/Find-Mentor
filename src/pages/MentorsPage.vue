@@ -1,32 +1,37 @@
 <template>
-  <div>list of mentors</div>
-  <div>mentor item goes here</div>
+  <base-card v-for="mentor in mentors" :key="mentor.id">
+    <mentor-item
+        :name="mentor.name"
+        :id:="mentor.id"
+        :email="mentor.email"
+    ></mentor-item>
+    <router-link :to="'/mentors/' + mentor.id">Contact Mentor</router-link>
+  </base-card>
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import { onMounted, ref} from "vue";
+import MentorItem from "@/components/MentorItem.vue";
+import BaseCard from "@/components/BaseCard.vue";
+import globalFunctions from "@/globalFunctions";
 export default {
+  components: { BaseCard, MentorItem },
   setup() {
-    const mentors = ref([])
+    const mentors = ref(null)
+    const fetchData = async () => {
+      try {
+        mentors.value = await globalFunctions.getData()
+      } catch (error) {
+        // TODO: General error function goes here
+        console.log(error)
+      }
+    }
+
     onMounted(() => {
-      fetch(process.env.VUE_APP_MENTOR_URL)
-          .then((response) => {
-            console.log(response)
-            if (response.ok) {
-              return response.json()
-            }
-          }).then((data) => { //Bu then amaci response.json dondugunde calisacak
-        const results = []
-        for (const id in data) {
-          results.push({id: id, name: data[id].name, rating: data[id].rating})
-        }
-        console.log(results)
-        mentors.value = results
-      })
-          .catch((error) => {
-            this.error = error
-          })
+      fetchData()
     })
+
+    return { mentors }
   }
 }
 </script>
