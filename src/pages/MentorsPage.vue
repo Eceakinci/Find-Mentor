@@ -7,6 +7,8 @@
     ></mentor-item>
     <router-link :to="'/mentors/' + mentor.id">Contact Mentor</router-link>
   </base-card>
+  <div v-for="city in cities" :key="city.id">{{city.name}}</div>
+
 </template>
 
 <script>
@@ -18,6 +20,7 @@ export default {
   components: { BaseCard, MentorItem },
   setup() {
     const mentors = ref(null)
+    const cities = ref('')
     const fetchData = async () => {
       try {
         mentors.value = await globalFunctions.getData()
@@ -26,12 +29,20 @@ export default {
         console.log(error)
       }
     }
-
+    const fetchCity = async () => {
+      try {
+        cities.value = await globalFunctions.getCityData()
+      } catch (error) {
+        // TODO: General error function goes here
+        console.log(error)
+      }
+    }
     onMounted(() => {
       fetchData()
+      fetchCity()
     })
 
-    return { mentors }
+    return { mentors, cities }
   }
 }
 </script>

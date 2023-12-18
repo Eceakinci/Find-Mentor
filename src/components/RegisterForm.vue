@@ -3,6 +3,8 @@
     <input type="text" placeholder="Name" v-model="name" required>
     <input type="text" placeholder="Email" v-model="email" required>
     <input type="text" placeholder="Password" v-model="password" required>
+    <input type="text" placeholder="City" v-model="city" required>
+<!--    TODO: city api? -->
     <!-- TODO: Re-enter password -->
     <!-- TODO: Email check regex - Email check if there is a user that holds that mail -->
     <button>Register</button>
@@ -19,10 +21,11 @@ export default {
     const name = ref('')
     const email = ref('')
     const password = ref('')
+    const city = ref('')
 
     const error = ref('')
     function addMentor() {
-      fetch(process.env.VUE_APP_MENTOR_URL, {
+      fetch(import.meta.env.VITE_APP_MENTOR_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -31,14 +34,15 @@ export default {
               id: new Date().toISOString(),
               name: name.value,
               email: email.value,
-              password: password.value
+              password: password.value,
+              city: city.value
         })
       }).then(response => {
         if (response.ok) {
-          console.log('selam')
           name.value = ''
           email.value = ''
           password.value = ''
+          city.value = ''
         } else {
           throw new Error('Could not save data')
         }
