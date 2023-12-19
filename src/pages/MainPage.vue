@@ -2,6 +2,4 @@
   <div>main page</div>
 </template>
 
-<script>
-
-</script>
+<script></script>

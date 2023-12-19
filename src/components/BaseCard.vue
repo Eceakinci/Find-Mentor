@@ -1,15 +1,5 @@
 <template>
-  <div class="container">
+  <div class="mx-8 my-auto rounded-md p-4 shadow-md">
     <slot></slot>
   </div>
 </template>
-
-<style scoped>
-  .container {
-    margin: 2rem auto;
-    max-width: 30rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    padding: 1rem;
-  }
-</style>

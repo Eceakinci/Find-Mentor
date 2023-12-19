@@ -7,13 +7,7 @@
 
 <script>
 export default {
-  props: ['name', 'id', 'email'],
-  setup() {
-
-  }
-}
+  props: ["name", "id", "email"],
+  setup() {},
+};
 </script>
-
-<style scoped>
-
-</style>

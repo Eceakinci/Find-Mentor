@@ -1,62 +1,74 @@
 <template>
-  <form class="container" @submit.prevent="addMentor">
-    <input type="text" placeholder="Name" v-model="name" required>
-    <input type="text" placeholder="Email" v-model="email" required>
-    <input type="text" placeholder="Password" v-model="password" required>
-    <input type="text" placeholder="City" v-model="city" required>
-<!--    TODO: city api? -->
-    <!-- TODO: Re-enter password -->
-    <!-- TODO: Email check regex - Email check if there is a user that holds that mail -->
+  <form @submit.prevent="addMentor">
+    <input type="text" placeholder="Name" v-model="name" required />
+    <input type="text" placeholder="Email" v-model="email" required />
+    <input type="text" placeholder="Password" v-model="password" required />
+    <select-dropdown :content="cities"></select-dropdown>
     <button>Register</button>
-    <!-- TODO: Error handling -->
     <div v-if="error">Error</div>
   </form>
+  <!--    TODO: city api? -->
+  <!-- TODO: Re-enter password -->
+  <!-- TODO: Email check regex - Email check if there is a user that holds that mail -->
+  <!-- TODO: Error handling -->
 </template>
 
 <script>
-import {ref} from "vue";
+import { onMounted, ref } from "vue";
+import SelectDropdown from "../components/SelectDropdown.vue";
+import globalFunctions from "../globalFunctions";
 
 export default {
+  components: { SelectDropdown },
   setup() {
-    const name = ref('')
-    const email = ref('')
-    const password = ref('')
-    const city = ref('')
+    const name = ref("");
+    const email = ref("");
+    const password = ref("");
+    const city = ref("");
+    const cities = ref("");
+    const error = ref("");
 
-    const error = ref('')
     function addMentor() {
       fetch(import.meta.env.VITE_APP_MENTOR_URL, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-              id: new Date().toISOString(),
-              name: name.value,
-              email: email.value,
-              password: password.value,
-              city: city.value
-        })
-      }).then(response => {
-        if (response.ok) {
-          name.value = ''
-          email.value = ''
-          password.value = ''
-          city.value = ''
-        } else {
-          throw new Error('Could not save data')
-        }
-      }).catch((error) => {
-        error.value = error
+          id: new Date().toISOString(),
+          name: name.value,
+          email: email.value,
+          password: password.value,
+          city: city.value,
+        }),
       })
+        .then((response) => {
+          if (response.ok) {
+            name.value = "";
+            email.value = "";
+            password.value = "";
+            city.value = "";
+          } else {
+            throw new Error("Could not save data");
+          }
+        })
+        .catch((error) => {
+          error.value = error;
+        });
     }
-    return { name, email, password, addMentor, error }
-  }
-}
+
+    const fetchCity = async () => {
+      try {
+        cities.value = await globalFunctions.getCityData();
+      } catch (error) {
+        // TODO: General error function goes here
+        console.log(error);
+      }
+    };
+    onMounted(() => {
+      fetchCity();
+    });
+    return { name, email, password, city, addMentor, error };
+  },
+};
 </script>
-
-<style scoped>
-.container {
-
-}
-</style>
