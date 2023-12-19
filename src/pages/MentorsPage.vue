@@ -7,15 +7,16 @@
     ></mentor-item>
     <router-link :to="'/mentors/' + mentor.id">Contact Mentor</router-link>
   </base-card>
-  <div v-for="city in cities" :key="city.id">{{city.name}}</div>
+  <div class="text-3xl font-bold underline">ANAN</div>
 
+  <div v-for="city in cities" :key="city.id" class="text-3xl font-bold underline">{{city.name}}</div>
 </template>
 
 <script>
 import { onMounted, ref} from "vue";
-import MentorItem from "@/components/MentorItem.vue";
-import BaseCard from "@/components/BaseCard.vue";
-import globalFunctions from "@/globalFunctions";
+import MentorItem from "../components/MentorItem.vue";
+import BaseCard from "../components/BaseCard.vue";
+import globalFunctions from "../globalFunctions";
 export default {
   components: { BaseCard, MentorItem },
   setup() {

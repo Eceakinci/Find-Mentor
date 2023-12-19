@@ -1,21 +1,7 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-const filename = fileURLToPath(import.meta.url);
-const pathSegments = path.dirname(filename);
-
+// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
-    resolve: {
-        alias: {
-            '@': path.resolve(pathSegments, './src'),
-        },
-        extensions: ['.mjs', '.js', '.json', '.vue'],
-    },
-    esbuild: {
-        jsxFactory: 'h',
-        jsxFragment: 'Fragment',
-    },
 })

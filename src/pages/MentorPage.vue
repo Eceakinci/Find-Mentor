@@ -10,8 +10,8 @@
 
 <script>
 import {onMounted, ref, watch} from 'vue';
-import BaseCard from '@/components/BaseCard.vue';
-import globalFunctions from '@/globalFunctions';
+import BaseCard from '../components/BaseCard.vue';
+import globalFunctions from '../globalFunctions';
 
 export default {
   components: { BaseCard },

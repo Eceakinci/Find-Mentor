@@ -1,8 +1,8 @@
 import {createRouter, createWebHistory} from "vue-router";
-import Main from "@/pages/MainPage.vue";
-import Mentor from "@/pages/MentorPage.vue";
-import Mentors from "@/pages/MentorsPage.vue";
-import Register from "@/pages/RegisterPage.vue";
+import Main from "./pages/MainPage.vue";
+import Mentor from "./pages/MentorPage.vue";
+import Mentors from "./pages/MentorsPage.vue";
+import Register from "./pages/RegisterPage.vue";
 
 const router = createRouter({
     routes: [
