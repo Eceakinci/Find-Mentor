@@ -3,7 +3,13 @@
     <input type="text" placeholder="Name" v-model="name" required />
     <input type="text" placeholder="Email" v-model="email" required />
     <input type="text" placeholder="Password" v-model="password" required />
-    <select-dropdown :content="cities"></select-dropdown>
+    <select-dropdown
+      name="cities"
+      id="city-select"
+      placeholder="Please select a city"
+      :data="cities"
+      isRequired="true"
+    ></select-dropdown>
     <button>Register</button>
     <div v-if="error">Error</div>
   </form>
@@ -60,6 +66,8 @@ export default {
     const fetchCity = async () => {
       try {
         cities.value = await globalFunctions.getCityData();
+        cities.value.map((item) => (item.value = item.name));
+        cities.value.sort((a, b) => a.value.localeCompare(b.value));
       } catch (error) {
         // TODO: General error function goes here
         console.log(error);
@@ -68,7 +76,7 @@ export default {
     onMounted(() => {
       fetchCity();
     });
-    return { name, email, password, city, addMentor, error };
+    return { name, email, password, city, addMentor, error, cities };
   },
 };
 </script>
