@@ -1,16 +1,18 @@
 <template>
-  <select
+  <div
     :name="name"
     :id="id"
     :required="isRequired"
     @click="toggleSelect"
-    :class="isOpened ? 'transition-[height]' : ''"
+    class="rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-pink-900 focus:border-blue-500 focus:ring-blue-500"
   >
-    <option value="" disabled selected>{{ placeholder }}</option>
-    <option v-for="item in data" :value="item.value">
-      {{ item.value }}
-    </option>
-  </select>
+    <ul v-if="opened">
+      <li value="">{{ placeholder }}</li>
+      <li v-for="item in data" :value="item.value">
+        {{ item.value }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -18,12 +20,12 @@ import { ref } from "vue";
 export default {
   props: ["name", "id", "placeholder", "data", "isRequired"],
   setup() {
-    const isOpened = ref(false);
+    const opened = ref(false);
 
     function toggleSelect() {
-      isOpened.value = !isOpened.value;
+      opened.value = !opened.value;
     }
-    return { toggleSelect, isOpened };
+    return { toggleSelect, opened };
   },
 };
 </script>
