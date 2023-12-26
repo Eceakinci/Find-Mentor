@@ -1,34 +1,55 @@
 <template>
-  <div class="flex w-full justify-center">
-    <form @submit.prevent="addMentor" class="flex w-96 flex-col">
-      <div class="flex h-12 flex-row justify-between divide-y divide-blue-200">
-        <input
-          class="border-1 rounded-md border-solid border-gray-950 focus:border focus:border-pink-700 focus:outline-0"
-          type="text"
-          placeholder="First Name"
-          v-model="name"
-          required
-        />
-        <input type="text" placeholder="Last Name" required />
-      </div>
-
-      <input class="h-12" type="text" placeholder="Username" required />
-
+  <div class="flex justify-center">
+    <form @submit.prevent="addMentor" class="flex w-96 flex-col items-start">
+      <label for="name">Name</label>
       <input
-        class="h-12"
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
         type="text"
-        placeholder="Email"
+        v-model="name"
+        id="name"
+        required
+      />
+      <label for="lastname">Last name</label>
+      <input
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        type="text"
+        v-model="lastname"
+        id="lastname"
+        required
+      />
+
+      <label for="username">Username</label>
+      <input
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        type="text"
+        v-model="username"
+        id="username"
+        required
+      />
+
+      <label for="email">Email</label>
+      <input
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        type="text"
         v-model="email"
+        id="email"
+        required
+      />
+
+      <label for="password">Password</label>
+      <input
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        type="text"
+        v-model="password"
+        id="password"
         required
       />
       <input
-        class="h-12"
+        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
         type="text"
-        placeholder="Password"
-        v-model="password"
+        placeholder="Confirm password"
         required
       />
-      <input class="h-12" type="text" placeholder="Confirm password" required />
 
       <!--    <select-dropdown-->
       <!--      name="cities"-->
@@ -42,7 +63,6 @@
     </form>
   </div>
 
-  <!--    TODO: city api? -->
   <!-- TODO: Re-enter password -->
   <!-- TODO: Email check regex - Email check if there is a user that holds that mail -->
   <!-- TODO: Error handling -->
@@ -57,6 +77,8 @@ export default {
   components: { SelectDropdown },
   setup() {
     const name = ref("");
+    const lastname = ref("");
+    const username = ref("");
     const email = ref("");
     const password = ref("");
     const city = ref("");
@@ -72,6 +94,8 @@ export default {
         body: JSON.stringify({
           id: new Date().toISOString(),
           name: name.value,
+          lastname: lastname.value,
+          username: username.value,
           email: email.value,
           password: password.value,
           city: city.value,
@@ -80,6 +104,8 @@ export default {
         .then((response) => {
           if (response.ok) {
             name.value = "";
+            lastname.value = "";
+            username.value = "";
             email.value = "";
             password.value = "";
             city.value = "";
@@ -105,7 +131,17 @@ export default {
     onMounted(() => {
       fetchCity();
     });
-    return { name, email, password, city, addMentor, error, cities };
+    return {
+      name,
+      lastname,
+      username,
+      email,
+      password,
+      city,
+      addMentor,
+      error,
+      cities,
+    };
   },
 };
 </script>
