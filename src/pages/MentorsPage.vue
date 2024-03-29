@@ -1,6 +1,10 @@
 <template>
   <container-card>
-    <base-card v-for="mentor in mentors" :key="mentor.id">
+    <base-card
+      v-for="mentor in mentors"
+      :key="mentor.id"
+      additionalClasses="min-w-64"
+    >
       <mentor-item
         :name="mentor.name"
         :id:="mentor.id"

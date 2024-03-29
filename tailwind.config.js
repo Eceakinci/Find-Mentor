@@ -6,6 +6,12 @@ export default {
       transitionProperty: {
         height: "height",
       },
+      minWidth: {
+        64: "16rem",
+      },
+      colors: {
+        "rose-button": "#F24471",
+      },
     },
   },
   plugins: [],

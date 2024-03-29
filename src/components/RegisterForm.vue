@@ -1,51 +1,51 @@
 <template>
   <div class="flex justify-center">
     <form @submit.prevent="addMentor" class="flex w-96 flex-col items-start">
-      <label for="name">Name</label>
+      <label class="pl-1" for="name">Name</label>
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 transition delay-150 ease-in-out focus:border-green-600/70 focus:outline-0"
         type="text"
         v-model="name"
         id="name"
         required
       />
-      <label for="lastname">Last name</label>
+      <label class="pl-1" for="lastname">Last name</label>
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 transition delay-150 ease-in-out focus:border-green-600/70 focus:outline-0"
         type="text"
         v-model="lastname"
         id="lastname"
         required
       />
 
-      <label for="username">Username</label>
+      <label class="pl-1" for="username">Username</label>
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 transition delay-150 ease-in-out focus:border-green-600/70 focus:outline-0"
         type="text"
         v-model="username"
         id="username"
         required
       />
 
-      <label for="email">Email</label>
+      <label class="pl-1" for="email">Email</label>
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 transition delay-150 ease-in-out focus:border-green-600/70 focus:outline-0"
         type="text"
         v-model="email"
         id="email"
         required
       />
 
-      <label for="password">Password</label>
+      <label class="pl-1" for="password">Password</label>
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 transition delay-150 ease-in-out focus:border-green-600/70 focus:outline-0"
         type="text"
         v-model="password"
         id="password"
         required
       />
       <input
-        class="h-12 rounded-lg border-2 border-indigo-400/50 focus:outline-0"
+        class="m-1 h-12 w-full rounded-lg border border-indigo-400/50 pl-2.5 placeholder-opacity-50 transition delay-150 ease-in-out focus:border-green-600/70 focus:placeholder-opacity-0 focus:outline-0"
         type="text"
         placeholder="Confirm password"
         required
@@ -58,7 +58,10 @@
       <!--      :data="cities"-->
       <!--      isRequired="true"-->
       <!--    ></select-dropdown>-->
-      <button>Register</button>
+      <div class="m-6 w-full">
+        <button class="h-8 w-32 bg-rose-500">Register</button>
+      </div>
+
       <div v-if="error">Error</div>
     </form>
   </div>
@@ -128,7 +131,7 @@ export default {
         console.log(error);
       }
     };
-    onMounted(() => {
+    const checkEmail = onMounted(() => {
       fetchCity();
     });
     return {
